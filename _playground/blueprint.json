@@ -1,0 +1,42 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/wp-admin/edit.php?post_type=page",
+	"steps": [
+		{
+			"step": "login",
+			"username": "admin"
+		},
+		{
+			"step": "setSiteOptions",
+			"options": {
+				"blogname": "BP AI Responder"
+			}
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "wordpress.org/plugins",
+				"slug": "buddypress"
+			}
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "url",
+				"url": "https://github-proxy.com/proxy/?repo=BhargavBhandari90/bp-ai-responder"
+			}
+		},
+		{
+			"step": "activatePlugin",
+			"pluginName": "BuddyPress",
+			"pluginPath": "/wordpress/wp-content/plugins/buddypress"
+		},
+		{
+			"step": "importWxr",
+			"file": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/BhargavBhandari90/bp-ai-responder/refs/heads/main/_playground/wordpress.xml"
+			}
+		}
+	]
+}
