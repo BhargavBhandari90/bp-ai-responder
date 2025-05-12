@@ -33,3 +33,9 @@ PHP Compatibility Check:
     - export PATH="$HOME/.composer/vendor/bin:$PATH"
     - phpcs -i
     - phpcs -p . --standard=PHPCompatibilityWP --runtime-set testVersion 7.4- --extensions=php
+
+on:
+    push:
+        branches: [ "**" ]
+    pull_request:
+        branches: [ "**" ]
