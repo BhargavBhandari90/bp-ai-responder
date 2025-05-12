@@ -81,7 +81,7 @@ function blp_bpai_generate_ai_response( $text ) {
 			'headers' => array(
 				'Content-Type' => 'application/json',
 			),
-			'body'    => json_encode( $data ),
+			'body'    => wp_json_encode( $data ),
 		)
 	);
 
@@ -128,9 +128,8 @@ function blp_bpai_convert_text_to_speech( $text ) {
 	$file_name  = 'ai_audio_' . time() . '.mp3';
 	$upload_dir = wp_upload_dir();
 	$file_path  = $upload_dir['path'] . '/' . $file_name;
-	file_put_contents( $file_path, $audio_data );
 
-	return $upload_dir['url'] . '/' . $file_name;
+	return $file_path;
 }
 
 /**

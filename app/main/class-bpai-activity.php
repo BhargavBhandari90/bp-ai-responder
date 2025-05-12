@@ -25,7 +25,7 @@ if ( ! class_exists( 'BPAI_Activity' ) ) {
 		 */
 		public function __construct() {
 
-			add_filter( 'bp_activity_comment_content', array( $this, 'display_ai_response_in_comment' ), 10, 2 );
+			add_filter( 'bp_activity_comment_content', array( $this, 'display_ai_response_in_comment' ), 10 );
 
 			add_action( 'bp_groups_posted_update', array( $this, 'bpl_bpai_generate_group_comment' ), 10, 4 );
 
@@ -76,17 +76,6 @@ if ( ! class_exists( 'BPAI_Activity' ) ) {
 			bp_activity_update_meta( $comment_activity_id, 'bpai_response', $ai_response_text );
 
 			wp_send_json_success( array( 'text' => $ai_response_text ) );
-
-			// Convert the AI response to audio.
-			// $audio_url = blp_bpai_convert_text_to_speech( $ai_response_text );
-
-			// if ( ! empty( $audio_url ) && function_exists( 'bp_activity_update_meta' ) ) {
-
-			// bp_activity_update_meta( $comment_activity_id, 'ai_audio_response', $audio_url );
-			// bp_activity_delete_meta( $comment_activity_id, 'needs_response' );
-
-			// wp_send_json_success( array( 'audio_url' => $audio_url ) );
-			// }
 
 			wp_send_json_error();
 		}
@@ -149,11 +138,10 @@ if ( ! class_exists( 'BPAI_Activity' ) ) {
 		 * @since 1.0.0
 		 *
 		 * @param string $comment_text The original comment text.
-		 * @param object $comment      The comment object.
 		 *
 		 * @return string The modified comment text with AI response.
 		 */
-		public function display_ai_response_in_comment( $comment_text, $comment ) {
+		public function display_ai_response_in_comment( $comment_text ) {
 
 			$needs_response = bp_activity_get_meta( bp_get_activity_comment_id(), 'needs_response', true );
 			$response_text  = bp_activity_get_meta( bp_get_activity_comment_id(), 'bpai_response', true );
@@ -184,8 +172,8 @@ if ( ! class_exists( 'BPAI_Activity' ) ) {
 						}
 						type();
 					}
-					var activity_id = '<?php echo bp_get_activity_comment_id(); ?>';
-					var nounce = '<?php echo wp_create_nonce( 'blp-bpai-nounce' ); ?>';
+					var activity_id = '<?php echo esc_attr( bp_get_activity_comment_id() ); ?>';
+					var nounce = '<?php echo esc_attr( wp_create_nonce( 'blp-bpai-nounce' ) ); ?>';
 					var comment_ele = jQuery( '#acomment-' + activity_id + ' .acomment-content' );
 
 					jQuery('#audio-player-'+activity_id).hide();

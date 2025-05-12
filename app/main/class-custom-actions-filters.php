@@ -1,5 +1,4 @@
-<?php
-
+<?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
 /**
  * Class for custom work.
  *
