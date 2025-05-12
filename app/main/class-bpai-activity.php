@@ -161,7 +161,7 @@ if ( ! class_exists( 'BPAI_Activity' ) ) {
 			/**
 			 * TODO: Audio response i'll do it later.
 			 */
-			// $audio_url = bp_activity_get_meta( bp_get_activity_comment_id(), 'ai_audio_response', true );
+			$audio_url = bp_activity_get_meta( bp_get_activity_comment_id(), 'ai_audio_response', true );
 
 			if ( $needs_response ) {
 
