@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
 /**
  * Class for custom work.
  *
@@ -60,7 +60,7 @@ if ( ! class_exists( 'BPAI_Admin_Core' ) ) {
 		public function blp_bpai_settings() {
 			?>
 			<div class="wrap">
-				<h1><?php echo __( 'AI Audio Responder Settings', 'bpai-core' ); ?></h1>
+				<h1><?php echo esc_html__( 'AI Audio Responder Settings', 'bpai-core' ); ?></h1>
 				<form method="post" action="options.php" novalidate="novalidate">
 					<?php settings_fields( 'bpai_settings' ); ?>
 					<table class="form-table" role="presentation">
@@ -81,7 +81,7 @@ if ( ! class_exists( 'BPAI_Admin_Core' ) ) {
 
 			register_setting( 'bpai_settings', 'bpai_setting' );
 
-			// register a new section in the "reading" page
+			// Register a new section in the "reading" page.
 			add_settings_section(
 				'bpai_settings_section',
 				esc_html__( 'API Keys', 'bpai-core' ),
@@ -259,7 +259,9 @@ if ( ! class_exists( 'BPAI_Admin_Core' ) ) {
 		 */
 		public function blp_bpai_generate_autoresponder() {
 
-			if ( isset( $_POST['generate-autoresponder'] ) ) {
+			$generate_autoresponder = filter_input( INPUT_POST, 'generate-autoresponder', FILTER_VALIDATE_INT );
+
+			if ( ! empty( $generate_autoresponder ) ) {
 
 				$username = 'ai_responder';
 				$email    = 'ai_responder@example.com';

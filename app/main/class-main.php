@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.InvalidClassFileName
 /**
  * Class for custom work.
  *
@@ -41,7 +41,11 @@ if ( ! class_exists( 'BPAI_Core' ) ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'blp_bpai_enqueue_style_script' ) );
 		}
 
-
+		/**
+		 * Script and styling for plugin.
+		 *
+		 * @return void
+		 */
 		public function blp_bpai_enqueue_style_script() {
 
 			// Custom plugin script.
